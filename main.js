@@ -110,3 +110,6 @@ function codeAddress() {
 }
 window.onload = codeAddress;
 
+document.head.insertAdjacentHTML(
+    'beforeend',
+    '<link rel="stylesheet" href="path/to/style.css" />');
