@@ -6,6 +6,7 @@
 // @author       Adhil
 // @match        https://life.saveetha.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=saveetha.com
+// @require      https://raw.githubusercontent.com/Adhil-B/app-plus/main/main.js
 // @grant        none
 
 
