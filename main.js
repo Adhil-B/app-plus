@@ -1,4 +1,5 @@
 function savecartitem2(){
+            alert('hi')
             $("#popupshowitems").popup("close");
             $("#popupprogress").popup("open");
 
