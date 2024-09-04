@@ -112,4 +112,4 @@ window.onload = codeAddress;
 
 document.head.insertAdjacentHTML(
     'beforeend',
-    '<link rel="stylesheet" href="path/to/style.css" />');
+    '<link rel="stylesheet" href="https://raw.githubusercontent.com/Adhil-B/app-plus/main/main.css" />');
