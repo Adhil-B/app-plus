@@ -15,4 +15,8 @@
 (function() {
     'use strict';
 
+document.head.insertAdjacentHTML(
+    'beforeend',
+    '<link rel="stylesheet" href="path/to/style.css" />');
+    
 })();
