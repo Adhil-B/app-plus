@@ -1,5 +1,4 @@
-(function() {
-    'use strict';
+
             function savecartitem2(){
             alert('hi')
             $("#popupshowitems").popup("close");
@@ -112,4 +111,4 @@ function codeAddress() {
    document.querySelector('#popupshowitems > div.ui-corner-bottom > div:nth-child(6) > a').onclick = savecartitem2;
 }
 window.onload = codeAddress;
-})();
+
