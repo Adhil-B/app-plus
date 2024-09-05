@@ -6,6 +6,7 @@
 // @author       Adhil
 // @match        https://life.saveetha.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=saveetha.com
+// @require      https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js
 // @grant        none
 
 
@@ -122,8 +123,12 @@
 }
 
 
-
 function codeAddress() {
+   // toastr.options.closeButton = true;
+   // toastr.options.closeHtml = "<button onclick='function(){window.location = `OrderStatus.aspx?orderauto`;}'><small>View Order</small></button>";
+    toastr.options.onclick = function() { window.location = "OrderStatus.aspx?orderauto" }
+    toastr.success('Click to view the order.', 'Order succesfully initiated!')
+
    try{
    document.querySelector('#popupshowitems > div.ui-corner-bottom > div:nth-child(6) > a').onclick = savecartitem2;
    }catch{}
@@ -133,10 +138,17 @@ function codeAddress() {
     window['view'](parseInt(document.querySelector('#ollistview > li.ui-last-child > a').getAttribute('onclick').split('view(')[1].split(');')[0]));
     }
 }
+
 window.onload = codeAddress;
 
 document.head.insertAdjacentHTML(
     'beforeend',
     '<link rel="stylesheet" href="https://raw.githubusercontent.com/Adhil-B/app-plus/main/main.css" />');
-    
+
+document.head.insertAdjacentHTML(
+    'beforeend',
+    '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />');
+
+
+
 })();
