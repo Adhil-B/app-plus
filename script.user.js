@@ -6,7 +6,6 @@
 // @author       Adhil
 // @match        https://life.saveetha.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=saveetha.com
-// @require      https://raw.githubusercontent.com/Adhil-B/app-plus/main/main.js
 // @grant        none
 
 
@@ -103,7 +102,7 @@
 
                                         $('#htotalcart').text('0');
                                         $('#hpaytotalcart').text('0');
-                                        window.location = "OrderStatus.aspx";
+                                        window.location = "OrderStatus.aspx?orderauto";
                                     }
                                 }
                             });
@@ -121,10 +120,18 @@
                 alert('Select item to initiate order.');
             }
 }
+
+
+
 function codeAddress() {
    try{
    document.querySelector('#popupshowitems > div.ui-corner-bottom > div:nth-child(6) > a').onclick = savecartitem2;
-   }
+   }catch{}
+   let url = new URL(window.location.href);
+
+    if (url.searchParams.has('orderauto')) {
+    window['view'](parseInt(document.querySelector('#ollistview > li.ui-last-child > a').getAttribute('onclick').split('view(')[1].split(');')[0]));
+    }
 }
 window.onload = codeAddress;
 
