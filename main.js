@@ -109,7 +109,7 @@ function savecartitem2(){
 function codeAddress() {
    try{
    document.querySelector('#popupshowitems > div.ui-corner-bottom > div:nth-child(6) > a').onclick = savecartitem2;
-   }
+   }catch{};
 }
 window.onload = codeAddress;
 
