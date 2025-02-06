@@ -1,8 +1,8 @@
 div#popupshowitems{
   width: 100%;
 }
-.body{
-  background-color: black;
+.copy {
+  display: none;
 }
 .col-sm-6.right-side{
   border-radius: 10px;
