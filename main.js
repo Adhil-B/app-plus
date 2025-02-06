@@ -141,7 +141,37 @@ function codeAddress() {
 }
 
 window.onload = codeAddress;
+try{
+            // Save input text to localStorage
+function saveInputText(inputId) {
+  const inputValue = document.getElementById(inputId).value;
+  localStorage.setItem(inputId, inputValue);
+}
 
+// Load input text from localStorage
+function loadInputText(inputId) {
+  const savedValue = localStorage.getItem(inputId);
+  if (savedValue) {
+    document.getElementById(inputId).value = savedValue;
+  }
+}
+
+// Example usage
+const inputElement = document.getElementById("txtusername");
+const inputElement2 = document.getElementById("txtpassword");
+
+// Save the input value on change
+inputElement.addEventListener("input", () => {
+  saveInputText("txtusername");
+});
+inputElement2.addEventListener("input", () => {
+  saveInputText("txtpassword");
+});
+
+// Load the saved value on page load
+loadInputText("txtusername");
+loadInputText("txtpassword");
+}catch{}
 
 document.head.insertAdjacentHTML(
     'beforeend',
