@@ -1,7 +1,7 @@
 div#popupshowitems{
   width: 100%;
 }
-.copy {
+.copy, .col-sm-12 {
   display: none;
 }
 .col-sm-6.right-side, .col-sm-10.col-sm-offset-1.login-page{
