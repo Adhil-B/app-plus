@@ -1,4 +1,3 @@
-alert("hi")
 function savecartitem2(){
             $("#popupshowitems").popup("close");
             $("#popupprogress").popup("open");
@@ -70,7 +69,21 @@ function savecartitem2(){
                                     }
                                     else {
 
-                                        alert('Order succesfully initiated');
+                                        Toastify({
+                                            text: "Order succesfully initiated! [ View ]",
+                                            duration: 3000,
+                                            destination: "OrderStatus.aspx?orderauto",
+                                            newWindow: false,
+                                            close: false,
+                                            gravity: "bottom", // `top` or `bottom`
+                                            position: "center", // `left`, `center` or `right`
+                                            stopOnFocus: true, // Prevents dismissing of toast on hover
+                                            style: {
+                                                background: "#00b09b",
+                                                borderRadius: "10px",
+                                            },
+                                            onClick: function(){} // Callback after click
+                                        }).showToast();
 
                                         setTimeout(function () {
                                             $("#popupprogress").popup("close");
@@ -88,7 +101,7 @@ function savecartitem2(){
 
                                         $('#htotalcart').text('0');
                                         $('#hpaytotalcart').text('0');
-                                        window.location = "OrderStatus.aspx";
+                                        //window.location = "OrderStatus.aspx?orderauto";
                                     }
                                 }
                             });
@@ -106,13 +119,30 @@ function savecartitem2(){
                 alert('Select item to initiate order.');
             }
 }
+
+
 function codeAddress() {
+   // toastr.options.closeButton = true;
+   // toastr.options.closeHtml = "<button onclick='function(){window.location = `OrderStatus.aspx?orderauto`;}'><small>View Order</small></button>";
+
+
+
    try{
    document.querySelector('#popupshowitems > div.ui-corner-bottom > div:nth-child(6) > a').onclick = savecartitem2;
-   }catch{};
+   }catch{}
+   let url = new URL(window.location.href);
+
+    if (url.searchParams.has('orderauto')) {
+    window['view'](parseInt(document.querySelector('#ollistview > li.ui-last-child > a').getAttribute('onclick').split('view(')[1].split(');')[0]));
+    }
+    if (window.location.pathname.includes('Orders.aspx')){
+    document.querySelector('#hbackloc').href = 'OrderbyHotel.aspx';
+    }
 }
+
 window.onload = codeAddress;
+
 
 document.head.insertAdjacentHTML(
     'beforeend',
-    '<link rel="stylesheet" href="https://raw.githubusercontent.com/Adhil-B/app-plus/main/main.css" />');
+    '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />');
