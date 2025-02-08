@@ -10,7 +10,18 @@ div#popupshowitems{
 .login-page .btn-deep-purple{
   position: absolute;
   bottom: 20vh;
-  width: 80vw;
+  width: 75vw;
   border-radius: 5px;
   height: 35px;
+}
+.col-sm-10.col-sm-offset-1.login-page {
+  width: 88vw;
+  bottom: -3vh;
+}
+.container {
+  justify-items: center;
+  display: grid;
+}
+.ui-corner-all {
+  display: none;
 }
