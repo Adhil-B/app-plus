@@ -181,10 +181,7 @@ document.head.insertAdjacentHTML(
 if (window.location.pathname.includes('/Food/Index.aspx')) {
             (function() {
     'use strict';
-const link = document.createElement("link");
-link.href = "https://fonts.googleapis.com/icon?family=Material+Icons";
-link.rel = "stylesheet";
-document.head.appendChild(link);
+
 
     const modernCSS = `
     /* Dark Base Theme */
