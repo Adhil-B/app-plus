@@ -192,10 +192,6 @@ if (window.location.pathname.includes('/Food/Index.aspx')) {
     }
 
 
-#spoffercnt {
-  top: 0px !important;
-  right: 0px !important;
-}
 
 
 
@@ -361,8 +357,8 @@ body {
         font-size: 0.8rem !important;
         padding: 2px 8px !important;
         position: absolute !important;
-        top: -8px !important;
-        right: -8px !important;
+        top: 0px !important;
+        right: 0px !important;
     }
 `;
 
