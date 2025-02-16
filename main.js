@@ -380,7 +380,7 @@ const iconMapping = {
     'My Profile': 'person'
 };
 
-document.querySelectorAll('[data-role="button"]').forEach(button => {
+/*document.querySelectorAll('[data-role="button"]').forEach(button => {
     const text = button.textContent.trim();
     const iconName = iconMapping[text] || 'help';
     button.innerHTML = `
@@ -389,7 +389,7 @@ document.querySelectorAll('[data-role="button"]').forEach(button => {
         </span>
         <div>${text}</div>
     `;
-});
+});*/
 
 // Add Material Icons font
 const materialIcons = document.createElement('link');
