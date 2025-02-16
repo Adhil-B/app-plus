@@ -452,141 +452,159 @@ setTimeout(() => {
 
 
 if (window.location.pathname.includes('/Food/Index.aspx')) {
-    // Preload Material Icons first
-    const preloadLink = document.createElement('link');
-    preloadLink.rel = 'preload';
-    preloadLink.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
-    preloadLink.as = 'style';
-    document.head.appendChild(preloadLink);
+// ======== FONT & STYLES LAYER ========
+// 1. Preload critical assets first
+const fontPreloader = document.createElement('link');
+fontPreloader.rel = 'preload';
+fontPreloader.href = 'https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2';
+fontPreloader.as = 'font';
+fontPreloader.crossOrigin = 'anonymous';
+document.head.prepend(fontPreloader);
 
-    // Font loading verification
-    const materialIcons = document.createElement('link');
-    materialIcons.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
-    materialIcons.rel = 'stylesheet';
-    materialIcons.onload = () => {
-        console.log('Material Icons loaded successfully');
-        injectStylesAndIcons();
-    };
-    materialIcons.onerror = () => {
-        console.error('Failed to load Material Icons');
-        injectFallbackIcons();
-    };
-    document.head.appendChild(materialIcons);
+// 2. Atomic CSS injection
+const coreStyles = document.createElement('style');
+coreStyles.textContent = `
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+}
 
-    function injectFallbackIcons() {
-        // SVG fallback implementation
-        const svgIcons = {
-            'restaurant': '<svg>...</svg>',
-            // Add SVG definitions for all icons
+.material-icons {
+    font-family: 'Material Icons' !important;
+    font-feature-settings: 'liga' 1 !important;
+    -webkit-font-smoothing: antialiased !important;
+    text-rendering: optimizeLegibility !important;
+    font-size: 2.4rem !important;
+    vertical-align: bottom !important;
+    position: relative !important;
+}
+
+/* Disable jQuery Mobile icon system */
+.ui-icon, .ui-btn-icon {
+    background-image: none !important;
+    text-indent: 0 !important;
+    width: auto !important;
+    height: auto !important;
+}
+`;
+document.head.prepend(coreStyles);
+
+// ======== ICON SYSTEM ========
+const iconSystem = {
+    // SVG fallbacks (critical icons only)
+    svg: {
+        restaurant: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>',
+        local_offer: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="48" height="48"><path d="M0 0h24v24H0V0z" fill="none"/><path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/></svg>'
+    },
+
+    // Icon mapping with text variants
+    mapping: {
+        'Food Courts': { icon: 'restaurant', variants: ['food', 'dining'] },
+        'Offers': { icon: 'local_offer', variants: ['discount', 'offer'] },
+        'Restaurants': { icon: 'restaurant', variants: ['dining', 'eat'] },
+        'Order Status': { icon: 'pending_actions', variants: ['status', 'tracking'] },
+        'Add Cash': { icon: 'account_balance_wallet', variants: ['wallet', 'topup'] },
+        'Feedback': { icon: 'feedback', variants: ['review', 'comment'] },
+        'Reports': { icon: 'analytics', variants: ['stats', 'data'] },
+        'My Profile': { icon: 'person', variants: ['account', 'user'] }
+    },
+
+    // Robust injection method
+    inject: () => {
+        const iconize = (element, iconKey) => {
+            const { icon, variants } = iconSystem.mapping[iconKey] || { icon: 'error' };
+            element.innerHTML = `
+                <span class="material-icons" 
+                      data-icon="${icon}"
+                      data-fallback="${iconSystem.svg[icon] || ''}">
+                    ${icon}
+                </span>
+                ${element.textContent.trim()}
+            `;
         };
-        document.querySelectorAll('.material-icons').forEach(icon => {
-            const iconName = icon.textContent;
-            icon.innerHTML = svgIcons[iconName] || '❔';
+
+        // Process main buttons
+        document.querySelectorAll('[data-role="button"]').forEach(btn => {
+            const btnText = btn.textContent.trim().replace(/\s+/g, ' ');
+            const match = Object.entries(iconSystem.mapping).find(([key, data]) => 
+                key === btnText || data.variants.some(v => btnText.includes(v))
+            );
+            iconize(btn, match ? match[0] : 'error');
+        });
+
+        // Process navbar
+        const navMap = {
+            'Home': 'home',
+            'Profile': 'person',
+            'Logoff': 'exit_to_app'
+        };
+        document.querySelectorAll('[data-role="navbar"] a').forEach(link => {
+            const text = link.textContent.trim();
+            iconize(link, navMap[text] || 'help');
         });
     }
+};
 
-    function injectStylesAndIcons() {
-        const fixedCSS = `
-            @font-face {
-                font-family: 'Material Icons';
-                font-style: normal;
-                font-weight: 400;
-                src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+// ======== FONT VERIFICATION ========
+const fontGuardian = {
+    watchInterval: null,
+    
+    checkFont: () => {
+        const testElement = document.createElement('span');
+        testElement.className = 'material-icons';
+        testElement.style.visibility = 'hidden';
+        testElement.textContent = 'check';
+        document.body.appendChild(testElement);
+
+        setTimeout(() => {
+            const isLoaded = getComputedStyle(testElement).fontFamily.includes('Material Icons');
+            testElement.remove();
+
+            if (!isLoaded) {
+                console.warn('Font load failed - activating SVG fallbacks');
+                document.querySelectorAll('.material-icons').forEach(icon => {
+                    const fallback = icon.dataset.fallback;
+                    if (fallback) icon.innerHTML = fallback;
+                });
             }
-            
-            .material-icons {
-                font-family: 'Material Icons' !important;
-                font-weight: normal !important;
-                font-style: normal !important;
-                font-size: 24px !important;
-                display: inline-block !important;
-                line-height: 1 !important;
-                text-transform: none !important;
-                -webkit-font-smoothing: antialiased !important;
-                text-rendering: optimizeLegibility !important;
-            }
+        }, 100);
+    },
 
-            /* Lock down icon styling */
-            [data-role="button"] .material-icons,
-            [data-role="navbar"] .material-icons {
-                font-family: 'Material Icons' !important;
-                font-size: 2.5rem !important;
-                margin-bottom: 0.5rem !important;
-                pointer-events: none !important;
-            }
-
-            /* Prevent jQuery Mobile interference */
-            .ui-btn .ui-icon, 
-            .ui-navbar .ui-icon {
-                background-image: none !important;
-                width: auto !important;
-                height: auto !important;
-            }
-        `;
-
-        const style = document.createElement('style');
-        style.textContent = fixedCSS;
-        document.head.appendChild(style);
-
-        // Icon mapping with verification
-        const iconMapping = {
-            'Food Courts': 'restaurant_menu',
-            'Offers': 'local_offer',
-            'Restaurants': 'restaurant',
-            'Order Status': 'pending_actions',
-            'Add Cash': 'account_balance_wallet',
-            'Feedback': 'feedback',
-            'Reports': 'analytics',
-            'My Profile': 'person_pin'
-        };
-
-        // Robust icon injection
-        const updateIcons = () => {
-            document.querySelectorAll('[data-role="button"]').forEach(button => {
-                const text = button.textContent.trim().split('\n')[0];
-                const iconName = iconMapping[text] || 'error';
-                button.innerHTML = `
-                    <span class="material-icons" aria-hidden="true">${iconName}</span>
-                    <div>${text}</div>
-                `;
-            });
-
-            document.querySelectorAll('[data-role="navbar"] a').forEach(link => {
-                const text = link.textContent.trim();
-                const icon = navIcons[text] || 'help';
-                link.innerHTML = `
-                    <span class="material-icons">${icon}</span>
-                    <span>${text}</span>
-                `;
-            });
-        };
-
-        // Initial injection
-        updateIcons();
-        
-        // Periodic verification
-        setInterval(() => {
-            document.querySelectorAll('.material-icons').forEach(icon => {
-                if(getComputedStyle(icon).fontFamily !== 'Material Icons') {
-                    icon.style.fontFamily = 'Material Icons !important';
-                }
-            });
-        }, 1000);
-
-        // MutationObserver for DOM changes
-        const observer = new MutationObserver(updateIcons);
-        observer.observe(document.body, {
-            subtree: true,
-            childList: true,
-            attributes: true
-        });
+    start: () => {
+        fontGuardian.watchInterval = setInterval(fontGuardian.checkFont, 2000);
+        fontGuardian.checkFont();
     }
+};
 
-    // Add Inter font
-    const fontLink = document.createElement('link');
-    fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap';
-    fontLink.rel = 'stylesheet';
-    document.head.appendChild(fontLink);
+// ======== EXECUTION ========
+// Initial injection
+iconSystem.inject();
+
+// Set up font guardian
+fontGuardian.start();
+
+// MutationObserver for dynamic content
+const domObserver = new MutationObserver(mutations => {
+    if (mutations.some(m => m.addedNodes.length)) {
+        iconSystem.inject();
+        fontGuardian.checkFont();
+    }
+});
+
+domObserver.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: false,
+    characterData: false
+});
+
+// Final cleanup safeguard
+window.addEventListener('beforeunload', () => {
+    clearInterval(fontGuardian.watchInterval);
+    domObserver.disconnect();
+});
 }
                         /////
 })();
