@@ -451,7 +451,143 @@ setTimeout(() => {
             });
 
 
+if (window.location.pathname.includes('/Food/Index.aspx')) {
+    // Preload Material Icons first
+    const preloadLink = document.createElement('link');
+    preloadLink.rel = 'preload';
+    preloadLink.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+    preloadLink.as = 'style';
+    document.head.appendChild(preloadLink);
 
+    // Font loading verification
+    const materialIcons = document.createElement('link');
+    materialIcons.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+    materialIcons.rel = 'stylesheet';
+    materialIcons.onload = () => {
+        console.log('Material Icons loaded successfully');
+        injectStylesAndIcons();
+    };
+    materialIcons.onerror = () => {
+        console.error('Failed to load Material Icons');
+        injectFallbackIcons();
+    };
+    document.head.appendChild(materialIcons);
+
+    function injectFallbackIcons() {
+        // SVG fallback implementation
+        const svgIcons = {
+            'restaurant': '<svg>...</svg>',
+            // Add SVG definitions for all icons
+        };
+        document.querySelectorAll('.material-icons').forEach(icon => {
+            const iconName = icon.textContent;
+            icon.innerHTML = svgIcons[iconName] || '❔';
+        });
+    }
+
+    function injectStylesAndIcons() {
+        const fixedCSS = `
+            @font-face {
+                font-family: 'Material Icons';
+                font-style: normal;
+                font-weight: 400;
+                src: url(https://fonts.gstatic.com/s/materialicons/v140/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format('woff2');
+            }
+            
+            .material-icons {
+                font-family: 'Material Icons' !important;
+                font-weight: normal !important;
+                font-style: normal !important;
+                font-size: 24px !important;
+                display: inline-block !important;
+                line-height: 1 !important;
+                text-transform: none !important;
+                -webkit-font-smoothing: antialiased !important;
+                text-rendering: optimizeLegibility !important;
+            }
+
+            /* Lock down icon styling */
+            [data-role="button"] .material-icons,
+            [data-role="navbar"] .material-icons {
+                font-family: 'Material Icons' !important;
+                font-size: 2.5rem !important;
+                margin-bottom: 0.5rem !important;
+                pointer-events: none !important;
+            }
+
+            /* Prevent jQuery Mobile interference */
+            .ui-btn .ui-icon, 
+            .ui-navbar .ui-icon {
+                background-image: none !important;
+                width: auto !important;
+                height: auto !important;
+            }
+        `;
+
+        const style = document.createElement('style');
+        style.textContent = fixedCSS;
+        document.head.appendChild(style);
+
+        // Icon mapping with verification
+        const iconMapping = {
+            'Food Courts': 'restaurant_menu',
+            'Offers': 'local_offer',
+            'Restaurants': 'restaurant',
+            'Order Status': 'pending_actions',
+            'Add Cash': 'account_balance_wallet',
+            'Feedback': 'feedback',
+            'Reports': 'analytics',
+            'My Profile': 'person_pin'
+        };
+
+        // Robust icon injection
+        const updateIcons = () => {
+            document.querySelectorAll('[data-role="button"]').forEach(button => {
+                const text = button.textContent.trim().split('\n')[0];
+                const iconName = iconMapping[text] || 'error';
+                button.innerHTML = `
+                    <span class="material-icons" aria-hidden="true">${iconName}</span>
+                    <div>${text}</div>
+                `;
+            });
+
+            document.querySelectorAll('[data-role="navbar"] a').forEach(link => {
+                const text = link.textContent.trim();
+                const icon = navIcons[text] || 'help';
+                link.innerHTML = `
+                    <span class="material-icons">${icon}</span>
+                    <span>${text}</span>
+                `;
+            });
+        };
+
+        // Initial injection
+        updateIcons();
+        
+        // Periodic verification
+        setInterval(() => {
+            document.querySelectorAll('.material-icons').forEach(icon => {
+                if(getComputedStyle(icon).fontFamily !== 'Material Icons') {
+                    icon.style.fontFamily = 'Material Icons !important';
+                }
+            });
+        }, 1000);
+
+        // MutationObserver for DOM changes
+        const observer = new MutationObserver(updateIcons);
+        observer.observe(document.body, {
+            subtree: true,
+            childList: true,
+            attributes: true
+        });
+    }
+
+    // Add Inter font
+    const fontLink = document.createElement('link');
+    fontLink.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap';
+    fontLink.rel = 'stylesheet';
+    document.head.appendChild(fontLink);
+}
                         /////
 })();
 }
