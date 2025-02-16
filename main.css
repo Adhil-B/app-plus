@@ -22,3 +22,8 @@ div#popupshowitems{
   justify-items: center;
   display: grid;
 }
+    body, .ui-page, .ui-header, .ui-content, .ui-popup {
+        background: #0f0f0f !important;
+        color: #ffffff !important;
+        font-family: 'Segoe UI', system-ui, sans-serif !important;
+    }
