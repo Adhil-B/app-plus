@@ -390,7 +390,7 @@ const iconMapping = {
         <div>${text}</div>
     `;
 });*/
-
+document.querySelectorAll('[data-role="button"] img')[0].style.borderRadius = '100%' 
 // Add Material Icons font
 const materialIcons = document.createElement('link');
 materialIcons.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
