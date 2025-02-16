@@ -196,7 +196,7 @@ if (window.location.pathname.includes('/Food/Index.aspx')) {
 
 
 .ui-grid-a > .ui-block-a, .ui-grid-a > .ui-block-b {
-  width: 40vw;
+  width: 43vw;
 }
 .ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
   text-shadow: none !important;
