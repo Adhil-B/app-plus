@@ -192,7 +192,10 @@ if (window.location.pathname.includes('/Food/Index.aspx')) {
     }
 
 
-
+#spoffercnt {
+  top: 0px !important;
+  right: 0px !important;
+}
 
 
 
