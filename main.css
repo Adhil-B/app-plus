@@ -1,24 +1,4 @@
 div#popupshowitems{
   width: 100%;
 }
-.copy, .col-sm-12, .gplus, .login-page .right-side p {
-  display: none;
-}
-.col-sm-6.right-side, .col-sm-10.col-sm-offset-1.login-page{
-  border-radius: 10px;
-}
-.login-page .btn-deep-purple{
-  position: absolute;
-  bottom: 20vh;
-  width: 75vw;
-  border-radius: 5px;
-  height: 35px;
-}
-.col-sm-10.col-sm-offset-1.login-page {
-  width: 88vw;
-  bottom: -3vh;
-}
-.container {
-  justify-items: center;
-  display: grid;
-}
+
