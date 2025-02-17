@@ -232,7 +232,7 @@ if (window.location.pathname.includes('/Food/OrderbyHotel.aspx')) {
     }
 
 
-
+toggleFavorite("35");
         updateList();
 
 
