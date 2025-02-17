@@ -231,6 +231,66 @@ if (window.location.pathname.includes('/Food/OrderbyHotel.aspx')) {
         list.listview("refresh");
     }
 
+    
+
+        updateList();
+
+
+
+})();
+
+}
+//Restauant Food
+if (window.location.pathname.includes('/Food/Orders.aspx')) {
+(function () {
+    let favorites = JSON.parse(localStorage.getItem("favoriteRestaurants")) || [];
+
+    function saveFavorites() {
+        localStorage.setItem("favoriteRestaurants", JSON.stringify(favorites));
+    }
+
+    function toggleFavorite(hotelId) {
+        const index = favorites.indexOf(hotelId);
+        if (index === -1) {
+            favorites.push(hotelId);
+        } else {
+            favorites.splice(index, 1);
+        }
+        saveFavorites();
+        updateList();
+    }
+
+    function updateList() {
+        let list = $("#ollistview");
+        let items = list.children("li").get();
+
+        let favoriteItems = [];
+        let normalItems = [];
+
+        items.forEach(item => {
+            let id = $(item).data("hotel-id");
+            if (favorites.includes(id)) {
+                favoriteItems.push(item);
+            } else {
+                normalItems.push(item);
+            }
+        });
+
+        list.empty();
+
+        if (favoriteItems.length > 0) {
+            list.append('<li data-role="list-divider" style="background: #ffcc00; font-weight: bold;">⭐ Favorites</li>');
+            list.append(favoriteItems);
+        }
+
+        if (normalItems.length > 0) {
+            list.append('<li data-role="list-divider" style="background: #ccc; font-weight: bold;">🍽️ All Restaurants</li>');
+            list.append(normalItems);
+        }
+
+        list.listview("refresh");
+    }
+
     function enhanceList() {
         $("#ollistview li").each(function () {
             let link = $(this).find("a");
@@ -263,7 +323,7 @@ if (window.location.pathname.includes('/Food/OrderbyHotel.aspx')) {
     }
 
     $(document).ready(function () {
-        setTimeout(enhanceList, 500); // Delay to ensure data loads
+        setTimeout(enhanceList, 100); // Delay to ensure data loads
     });
 })();
 
