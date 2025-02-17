@@ -178,7 +178,209 @@ document.head.insertAdjacentHTML(
     '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />');
 
 
+//Login
+if (window.location.pathname == '/') {
+(function() {
+    // Remove unwanted elements
+    const removeElements = () => {
+        document.querySelectorAll('marquee').forEach(el => el.remove());
+        document.querySelectorAll('.right-side > p').forEach(el => el.remove());
+        document.querySelectorAll('.form-group a.gplus, .form-group p').forEach(el => {
+            if (el.textContent.includes('Create User Login') || el.textContent.includes('Sign Up')) {
+                el.parentElement.remove();
+            }
+        });
+        document.querySelectorAll('.left-side p').forEach(el => {
+            if (el.textContent.includes('Sign Up')) {
+                el.remove();
+            }
+        });
+        document.querySelectorAll('.left-side a.gplus').forEach(el => {
+            if (el.textContent.includes('Create User Login')) {
+                el.remove();
+            }
+        });
+    };
 
+    // Create and inject styles
+    const style = document.createElement('style');
+    style.textContent = `
+        body, html {
+            background-color: #1a1a1a !important;
+            color: #ffffff !important;
+            min-height: 100vh !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+        }
+
+        .container {
+            min-height: 100vh !important;
+            background-color: #1a1a1a !important;
+            position: relative !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            padding: 2rem 0 !important;
+        }
+
+        .content-wrapper {
+            background-color: #1a1a1a !important;
+            flex: 1 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+
+        .login-page {
+            background: transparent !important;
+            width: 100% !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            border-radius: 24px !important;
+        }
+
+        .login-page .right-side {
+            background: #2d2d2d !important;
+            border-radius: 24px !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2) !important;
+            padding: 2.5rem !important;
+            padding-top: 3.6rem !important;
+            max-width: 400px !important;
+            width: 100% !important;
+            margin: 0 auto !important;
+        }
+
+        .form-control {
+            background-color: #3d3d3d !important;
+            border: 2px solid #4d4d4d !important;
+            color: white !important;
+            border-radius: 14px !important;
+            padding: 12px 16px !important;
+            margin-bottom: 1.25rem !important;
+            font-size: 15px !important;
+            transition: all 0.3s ease !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        .form-control:focus {
+            background-color: #3d3d3d !important;
+            border-color: #ff6b2c !important;
+            box-shadow: 0 0 0 3px rgba(255, 107, 44, 0.15) !important;
+        }
+.login-page .form-control {
+border-bottom: 0px solid #ec600b00 !important;
+border-radius: 10px !important;
+}
+        .btn-deep-purple {
+            background: linear-gradient(135deg, #ff6b2c 0%, #e65c00 100%) !important;
+            border: none !important;
+            color: white !important;
+            padding: 10px 28px !important;
+            border-radius: 12px !important;
+            transition: all 0.3s ease !important;
+            width: 100% !important;
+            margin-top: 1.5rem !important;
+            font-weight: 600 !important;
+            font-size: 16px !important;
+            letter-spacing: 0.3px !important;
+            position: relative !important;
+            overflow: hidden !important;
+            box-shadow: 0 4px 15px rgba(230, 92, 0, 0.3) !important;
+        }
+
+        .btn-deep-purple:hover {
+            background: linear-gradient(135deg, #ff7b3c 0%, #ff6600 100%) !important;
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 20px rgba(230, 92, 0, 0.4) !important;
+        }
+
+        label {
+            color: #cccccc !important;
+            margin-bottom: 0.75rem !important;
+            display: block !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+            letter-spacing: 0.3px !important;
+        }
+
+        .widget-foot {
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            text-align: center !important;
+            padding: 1rem !important;
+            background: #1a1a1a !important;
+            color: #888888 !important;
+        }
+
+        img[src*="sulogo.png"] {
+            background: transparent !important;
+            border-radius: 16px !important;
+            margin-bottom: 2rem !important;
+            max-width: 200px !important;
+            height: auto !important;
+            display: block !important;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
+        /* Container background gradient */
+        .container::before {
+            content: '' !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 101% !important;
+            background: radial-gradient(circle at top right, rgba(255, 107, 44, 0.1), transparent 60%) !important;
+            pointer-events: none !important;
+            z-index: 0 !important;
+        }
+        .content-wrapper.main-content.clear-fix{
+       margin-top: -10px !important;
+        }
+.login-page .right-side {
+min-height: 380px !important;
+}
+        /* Form spacing */
+        .form {
+            margin-top: 1rem !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem !important;
+        }
+
+        /* Ensure footer links are visible */
+        .widget-foot a {
+            color: #ff6b2c !important;
+            text-decoration: none !important;
+            transition: color 0.3s ease !important;
+        }
+
+        .widget-foot a:hover {
+            color: #ff7b3c !important;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Execute element removal
+    removeElements();
+
+    // Update text content
+    const welcomeText = document.querySelector('.left-side h1');
+    if (welcomeText) {
+        welcomeText.style.fontSize = '2.5rem';
+        welcomeText.style.fontWeight = 'bold';
+    }
+})();
+}
 
 //Resturant List
 if (window.location.pathname.includes('/Food/OrderbyHotel.aspx')) {
