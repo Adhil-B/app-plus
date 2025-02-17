@@ -179,7 +179,7 @@ document.head.insertAdjacentHTML(
 
 
 //Login
-if (window.location.pathname == '/') {
+if (window.location.pathname == '/' || window.location.pathname.includes('/Login.aspx')) {
 (function() {
     // Remove unwanted elements
     const removeElements = () => {
