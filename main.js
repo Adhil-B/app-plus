@@ -176,6 +176,101 @@ loadInputText("txtpassword");
 document.head.insertAdjacentHTML(
     'beforeend',
     '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />');
+
+
+
+
+//Resturant List
+if (window.location.pathname.includes('/Food/OrderbyHotel.aspx')) {
+(function () {
+    let favorites = JSON.parse(localStorage.getItem("favoriteRestaurants")) || [];
+
+    function saveFavorites() {
+        localStorage.setItem("favoriteRestaurants", JSON.stringify(favorites));
+    }
+
+    function toggleFavorite(hotelId) {
+        const index = favorites.indexOf(hotelId);
+        if (index === -1) {
+            favorites.push(hotelId);
+        } else {
+            favorites.splice(index, 1);
+        }
+        saveFavorites();
+        updateList();
+    }
+
+    function updateList() {
+        let list = $("#ollistview");
+        let items = list.children("li").get();
+
+        let favoriteItems = [];
+        let normalItems = [];
+
+        items.forEach(item => {
+            let id = $(item).data("hotel-id");
+            if (favorites.includes(id)) {
+                favoriteItems.push(item);
+            } else {
+                normalItems.push(item);
+            }
+        });
+
+        list.empty();
+
+        if (favoriteItems.length > 0) {
+            list.append('<li data-role="list-divider" style="background: #ffcc00; font-weight: bold;">⭐ Favorites</li>');
+            list.append(favoriteItems);
+        }
+
+        if (normalItems.length > 0) {
+            list.append('<li data-role="list-divider" style="background: #ccc; font-weight: bold;">🍽️ All Restaurants</li>');
+            list.append(normalItems);
+        }
+
+        list.listview("refresh");
+    }
+
+    function enhanceList() {
+        $("#ollistview li").each(function () {
+            let link = $(this).find("a");
+            let href = link.attr("href");
+            let hotelId = new URLSearchParams(href.split("?")[1]).get("id");
+
+            if (!hotelId) return;
+
+            $(this).attr("data-hotel-id", hotelId);
+
+            let favButton = $("<button>")
+                .text(favorites.includes(hotelId) ? "★" : "☆")
+                .css({
+                    float: "right",
+                    fontSize: "20px",
+                    border: "none",
+                    background: "transparent",
+                    cursor: "pointer",
+                })
+                .click(function (e) {
+                    e.preventDefault();
+                    toggleFavorite(hotelId);
+                    $(this).text(favorites.includes(hotelId) ? "★" : "☆");
+                });
+
+            link.append(favButton);
+        });
+
+        updateList();
+    }
+
+    $(document).ready(function () {
+        setTimeout(enhanceList, 2000); // Delay to ensure data loads
+    });
+})();
+
+}
+
+
+
 //Order
 if (window.location.pathname.includes('/Food/OrderStatus.aspx')) {
 /*! NoSleep.min.js v0.12.0 - git.io/vfn01 - Rich Tibbett - MIT license */
