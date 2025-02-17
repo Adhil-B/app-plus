@@ -1,4 +1,7 @@
 div#popupshowitems{
   width: 100%;
 }
-
+.copy {
+  font-size: smaller;
+  opacity: 70%;
+}
