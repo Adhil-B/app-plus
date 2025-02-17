@@ -231,7 +231,7 @@ if (window.location.pathname.includes('/Food/OrderbyHotel.aspx')) {
         list.listview("refresh");
     }
 
-    
+    toggleFavorite(35);
 
         updateList();
 
