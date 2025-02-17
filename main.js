@@ -263,7 +263,7 @@ if (window.location.pathname.includes('/Food/OrderbyHotel.aspx')) {
     }
 
     $(document).ready(function () {
-        setTimeout(enhanceList, 2000); // Delay to ensure data loads
+        setTimeout(enhanceList, 500); // Delay to ensure data loads
     });
 })();
 
