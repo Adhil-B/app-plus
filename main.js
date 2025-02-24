@@ -544,6 +544,23 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
 
 
  const modernCSS = `
+ .ui-link.ui-btn-right.ui-btn.ui-icon-back.ui-btn-icon-notext.ui-shadow.ui-corner-all {
+  display: none;
+}
+.ui-header .ui-title, .ui-footer .ui-title {
+  font-size: 1.5em !important;
+  text-align: left !important;
+  margin: 0px 12.5vw !important;
+}
+.ui-link.ui-btn-left.ui-btn.ui-icon-carat-l.ui-btn-icon-notext.ui-shadow.ui-corner-all {
+  padding: .7em 0;
+  background-color: transparent;
+  border-width: 0px;
+  margin-left: 10px;
+}
+.ui-btn-icon-left::after, .ui-btn-icon-right::after, .ui-btn-icon-top::after, .ui-btn-icon-bottom::after, .ui-btn-icon-notext::after {
+  background-color: transparent !important;
+}
  h4 {
   font-weight: normal !important;
 }
