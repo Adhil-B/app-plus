@@ -558,9 +558,9 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
   
   }
   img{
-  border-radius: 100%;
-  height: 80px;
-  width: 80px;
+  border-radius: 100% !important;
+  height: 80px !important;
+  width: 80px !important;
   transform: translate(-50%, -80%);
   position: absolute;
   left: 50%;
