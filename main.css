@@ -1,7 +1,26 @@
 div#popupshowitems{
   width: 100%;
 }
+
 .copy {
   font-size: smaller;
   opacity: 70%;
 }
+
+    [data-role="header"] {
+    position: absolute !important;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+        border: none !important;
+        /*padding: 15px 20px !important;*/
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+    }
+
+    [data-role="header"] h1 {
+        /*font-size: 1.8rem !important;*/
+        font-weight: 700 !important;
+        color: white;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.3) !important;
+    }
