@@ -549,7 +549,7 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
   padding: 30px;
   border-radius: 10px;
   margin-top: 10px;
-  color: white
+  color: white;
   text-shadow: none;
   }
   .ui-page.ui-page-theme-a.ui-page-header-fixed.ui-page-footer-fixed.ui-page-active{
