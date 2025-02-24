@@ -583,12 +583,12 @@ border-radius: .3125em !important;
 const style = document.createElement('style');
 style.textContent = modernCSS;
 document.head.appendChild(style);
-                        
+if (document.querySelector("#hname").innerHTML.include(' - '))    {                
 document.querySelector("#hmobile").innerHTML = `<b>Reg. No: </b>${document.querySelector("#hname").innerHTML.split(': ')[1].split(" -")[0]}</b>`;
 document.querySelector("#hname").innerHTML = `<b>Name: </b>${document.querySelector("#hname").innerHTML.split('- ')[1]}</b>`;
 document.querySelector("#hlocation").innerHTML = `<b>Default Location: </b>${document.querySelector("#hlocation").innerHTML.split(': ')[1]}</b>`;
 document.querySelectorAll("div")[9].style.borderRadius = ".3125em !important";
-                        
+}               
 })();}
              
 //Home 
