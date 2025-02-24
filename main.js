@@ -544,7 +544,7 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
 
 
  const modernCSS = `
-.ui-page-theme-a .ui-btn.ui-btn-active{
+.ui-btn-active.ui-state-persist.ui-link.ui-btn{
     background: rgba(255,106,0,0.45) !important;
     border: 1px solid rgba(255,106,0,0.3) !important;
 }
