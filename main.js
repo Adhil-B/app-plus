@@ -561,7 +561,7 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
 const style = document.createElement('style');
 style.textContent = modernCSS;
 document.head.appendChild(style);
-}}
+})();}
              
 //Home 
 if (window.location.pathname.includes('/Food/Index.aspx')) {
