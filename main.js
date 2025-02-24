@@ -580,6 +580,11 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
 const style = document.createElement('style');
 style.textContent = modernCSS;
 document.head.appendChild(style);
+                        
+document.querySelector("#hmobile").innerHTML = `<b>Reg. No: </b>${document.querySelector("#hname").innerHTML.split(': ')[1].split(" -")[0]}</b>`;
+document.querySelector("#hname").innerHTML = `<b>Name: </b>${document.querySelector("#hname").innerHTML.split('- ')[1]}</b>`;
+document.querySelector("#hlocation").innerHTML = `<b>Default Location: </b>${document.querySelector("#hlocation").innerHTML.split(': ')[1]}</b>`;
+
 })();}
              
 //Home 
