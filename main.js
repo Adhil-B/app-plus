@@ -544,7 +544,7 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
 
 
  const modernCSS = `
- .ui-page-theme-a .ui-btn.ui-btn-active{
+ .ui-btn-active.ui-state-persist.ui-link.ui-btn{
     background: linear-gradient(135deg, #ff7b3c 0%, #f60 100%) !important;
     border-width: 0px;
 }
