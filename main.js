@@ -547,6 +547,9 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
  h4 {
   font-weight: normal !important;
 }
+.ui-btn-active.ui-state-persist.ui-link.ui-btn{
+border-radius: .3125em !important;
+}
  #haddress, #hfathermobile, #hdob{
  display: none;
  }
@@ -584,7 +587,8 @@ document.head.appendChild(style);
 document.querySelector("#hmobile").innerHTML = `<b>Reg. No: </b>${document.querySelector("#hname").innerHTML.split(': ')[1].split(" -")[0]}</b>`;
 document.querySelector("#hname").innerHTML = `<b>Name: </b>${document.querySelector("#hname").innerHTML.split('- ')[1]}</b>`;
 document.querySelector("#hlocation").innerHTML = `<b>Default Location: </b>${document.querySelector("#hlocation").innerHTML.split(': ')[1]}</b>`;
-
+document.querySelectorAll("div")[9].style.borderRadius = ".3125em !important";
+                        
 })();}
              
 //Home 
