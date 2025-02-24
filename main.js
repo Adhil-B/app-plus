@@ -544,6 +544,12 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
 
 
  const modernCSS = `
+ h4 {
+  font-weight: normal !important;
+}
+ #haddress, #hfathermobile, #hdob{
+ display: none;
+ }
  .ui-field-contain {
   background: linear-gradient(145deg, #1e1e1e 0%, #2a2a2a 100%) !important;
   padding: 30px;
