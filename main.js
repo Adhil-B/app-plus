@@ -557,7 +557,7 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
   margin-top: 10px;
   color: white;
   text-shadow: none;
-  margin-top: 40px;
+  margin-top: 65px;
   }
   .ui-page.ui-page-theme-a.ui-page-header-fixed.ui-page-footer-fixed.ui-page-active{
   background-color: black;
