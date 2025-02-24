@@ -544,9 +544,9 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
 
 
  const modernCSS = `
- .ui-btn-active.ui-state-persist.ui-link.ui-btn{
-    background: linear-gradient(135deg, #ff7b3c 0%, #f60 100%) !important;
-    border-width: 0px;
+.ui-page-theme-a .ui-btn.ui-btn-active{
+    background: rgba(255,106,0,0.25) !important;
+    border: 1px solid rgba(255,106,0,0.3) !important;
 }
  .ui-link.ui-btn-right.ui-btn.ui-icon-back.ui-btn-icon-notext.ui-shadow.ui-corner-all {
   display: none;
@@ -609,6 +609,7 @@ document.querySelector("#hmobile").innerHTML = `<b>Reg. No: </b>${document.query
 document.querySelector("#hname").innerHTML = `<b>Name: </b>${document.querySelector("#hname").innerHTML.split('- ')[1]}</b>`;
 document.querySelector("#hlocation").innerHTML = `<b>Default Location: </b>${document.querySelector("#hlocation").innerHTML.split(': ')[1]}</b>`;
 document.querySelectorAll("div")[9].style.borderRadius = "10px";
+document.querySelectorAll("div")[9].style.backgroundColor = "transparent";
 }               
 })();}
              
