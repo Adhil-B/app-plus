@@ -551,10 +551,22 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
   margin-top: 10px;
   color: white;
   text-shadow: none;
+  margin-top: 40px;
   }
   .ui-page.ui-page-theme-a.ui-page-header-fixed.ui-page-footer-fixed.ui-page-active{
   background-color: black;
   
+  }
+  img{
+  border-radius: 100%;
+  height: 80px;
+  width: 80px;
+  transform: translate(-50%, -80%);
+  position: absolute;
+  left: 50%;
+  }
+  #hname{
+  margin-top: 45px;
   }
   `;
 
