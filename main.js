@@ -563,7 +563,7 @@ border-radius: .3125em !important;
   margin-top: 65px;
   }
   .ui-page.ui-page-theme-a.ui-page-header-fixed.ui-page-footer-fixed.ui-page-active{
-  background-color: black;
+  background-color: #0f0f0f !important;
   
   }
   img{
