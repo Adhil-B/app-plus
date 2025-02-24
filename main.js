@@ -553,7 +553,7 @@ if (window.location.pathname.includes('/Food/MyProfile.aspx')) {
   margin: 0px 12.5vw !important;
 }
 .ui-link.ui-btn-left.ui-btn.ui-icon-carat-l.ui-btn-icon-notext.ui-shadow.ui-corner-all {
-  padding: .7em 0;
+  margin: .7em 0;
   background-color: transparent;
   border-width: 0px;
   margin-left: 10px;
